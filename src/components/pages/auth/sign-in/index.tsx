@@ -2,7 +2,7 @@ import { Button, Form, Input, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import useUsersApi from "../../../service/api/users";
 import { useDispatch, useSelector } from "react-redux";
-import loader, { endLoading, startLoading } from "../../../store/loader";
+import { endLoading, startLoading } from "../../../store/loader";
 
 type FieldType = {
   fullName?: string;
@@ -18,18 +18,19 @@ const SignIn = () => {
 
   const onFinish = (values: any) => {
     dispatch(startLoading(true));
-    login(values).then((data) => {
-      if (data) {
-        message.success("You are currently logged in")
-        dispatch(endLoading(false));
-        localStorage.setItem("token", data?.data.token);
-        return navigate("/");
-      }
-    }).catch((error: any) => {
+    login(values)
+      .then((data) => {
+        if (data) {
+          message.success("You are currently logged in");
+          dispatch(endLoading(false));
+          localStorage.setItem("token", data?.data.token);
+          return navigate("/");
+        }
+      })
+      .catch((error: any) => {
         dispatch(endLoading(false));
         message.error(error);
-        
-    })
+      });
   };
   return (
     <div className="flex-col flex items-center justify-center h-screen w-full leading-[50px]">
@@ -73,7 +74,11 @@ const SignIn = () => {
           />
         </Form.Item>
         <Form.Item>
-          <Button className="w-full h-[40px] mt-4" htmlType="submit" loading={isloading}>
+          <Button
+            className="w-full h-[40px] mt-4"
+            htmlType="submit"
+            loading={isloading}
+          >
             Submit
           </Button>
         </Form.Item>
