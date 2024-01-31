@@ -5,9 +5,8 @@ const Layout = () => {
   return (
     <div>
         <header>
-            <nav>
+            <nav className="py-[30px]">
                 <Navbar />
-
             </nav>
         </header>
         <main>

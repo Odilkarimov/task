@@ -7,3 +7,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+.container-box {
+  width: 100%;
+  max-width: 1440px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
